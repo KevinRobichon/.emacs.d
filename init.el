@@ -63,6 +63,7 @@
 (setq evil-default-cursor t)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(setq flycheck-clang-include-path '("."))
 (add-hook 'after-init-hook #'global-company-mode)
 
 (custom-set-variables
