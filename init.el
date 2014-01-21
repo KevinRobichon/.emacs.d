@@ -74,15 +74,15 @@
  '(coffee-tab-width 4)
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
 
-(load-theme 'solarized-dark)
-
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(load-theme 'solarized-dark)
+(set-face-attribute 'default nil :height 110)
 
 (provide 'init)
 ;;; init.el ends here
