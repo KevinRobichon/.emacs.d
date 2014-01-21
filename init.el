@@ -59,6 +59,8 @@
 
 (ido-mode t)
 
+(global-auto-revert-mode t)
+
 (evil-mode t)
 (setq evil-default-cursor t)
 
