@@ -43,17 +43,29 @@
       (package-delete (symbol-name package) (package-version-joined package)))))
 
 (package-declare 'evil
-		 'solarized-theme
-		 'flycheck
-		 'company
-		 'coffee-mode
-		 )
+                 'solarized-theme
+                 'flycheck
+                 'company
+                 'coffee-mode
+                 'web-mode
+                 'misc-cmds
+                 )
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
 (show-paren-mode 1)
+
+(setq-default c-basic-offset 4
+              tab-width 4
+              indent-tabs-mode nil)
+
+(defun web-mode-hook ()
+  "Hook for web-mode."
+  (setq web-mode-markup-indent-offset 4))
+
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 (setq ring-bell-function 'ignore)
 
