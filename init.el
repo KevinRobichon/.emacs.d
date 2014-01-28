@@ -16,32 +16,24 @@
                  'company
                  'coffee-mode
                  'web-mode
+                 'yaml-mode
                  'misc-cmds
                  'ido-ubiquitous
                  'powerline
                  )
 
-(require 'init-ido)
-(require 'init-evil)
+;; base
 (require 'init-look)
+(require 'init-ido)
+(require 'init-edit)
 
-(setq-default c-default-style "linux"
-              c-basic-offset 4
-              tab-width 4
-              indent-tabs-mode nil)
+;; minor modes
+(require 'init-evil)
+(require 'init-flycheck)
+(require 'init-company)
 
-(defun web-mode-hook ()
-  "Hook for web-mode."
-  (setq web-mode-markup-indent-offset 4)
-  (setq web-mode-css-indent-offset 4)
-  (setq web-mode-code-indent-offset 4))
-
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-(global-auto-revert-mode t)
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(setq flycheck-clang-include-path '("."))
-(add-hook 'after-init-hook #'global-company-mode)
+;; major modes
+(require 'init-c)
+(require 'init-web)
 
 (provide 'init)
