@@ -20,6 +20,8 @@
                  'misc-cmds
                  'ido-ubiquitous
                  'powerline
+                 'frame-fns
+                 'frame-cmds
                  )
 
 ;; base
