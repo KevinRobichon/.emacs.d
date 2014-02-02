@@ -4,8 +4,10 @@
 (package-declare 'evil
                  'flycheck
                  'company
+                 'magit
                  'flx
                  'flx-ido
+                 'smex
                  'coffee-mode
                  'web-mode
                  'yaml-mode
@@ -14,9 +16,7 @@
                  'powerline
                  'frame-fns
                  'frame-cmds
-                 'solarized-theme
                  'ujelly-theme
-                 'zenburn-theme
                  'color-theme-wombat+
                  'clues-theme
                  'grandshell-theme
