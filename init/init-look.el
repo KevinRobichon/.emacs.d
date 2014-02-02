@@ -5,7 +5,7 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
 
-(load-theme 'cyberpunk t)
+(load-theme 'grandshell t)
 
 (powerline-default-theme)
 

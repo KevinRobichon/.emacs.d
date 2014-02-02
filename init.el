@@ -2,6 +2,18 @@
 
 (require 'init-package)
 (package-declare 'evil
+                 'flycheck
+                 'company
+                 'flx
+                 'flx-ido
+                 'coffee-mode
+                 'web-mode
+                 'yaml-mode
+                 'misc-cmds
+                 'ido-ubiquitous
+                 'powerline
+                 'frame-fns
+                 'frame-cmds
                  'solarized-theme
                  'ujelly-theme
                  'zenburn-theme
@@ -12,16 +24,7 @@
                  'phoenix-dark-pink-theme
                  'color-theme-sanityinc-tomorrow
                  'cyberpunk-theme
-                 'flycheck
-                 'company
-                 'coffee-mode
-                 'web-mode
-                 'yaml-mode
-                 'misc-cmds
-                 'ido-ubiquitous
-                 'powerline
-                 'frame-fns
-                 'frame-cmds
+                 'base16-theme
                  )
 
 ;; base

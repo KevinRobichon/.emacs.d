@@ -6,6 +6,8 @@
               indent-tabs-mode nil
               show-trailing-whitespace t
               make-backup-files nil
+              auto-save-list-file-name nil
+              auto-save-default nil
               )
 
 (dolist (hook '(shell-mode-hook
