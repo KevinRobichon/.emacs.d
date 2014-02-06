@@ -10,7 +10,7 @@
 
 (defun package-dependencies (package)
   (let ((info (assoc package package-alist)))
-    (and info (mapcar 'car (package-desc-reqs (cdr info))))))
+    (and info (mapcar 'car (package-desc-reqs (cadr info))))))
 
 (defun package-maybe-install (package)
   (unless (package-installed-p package) (package-install package)))

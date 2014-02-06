@@ -12,6 +12,5 @@
 (set-face-attribute 'default nil :height 110)
 
 (maximize-frame)
-(toggle-frame-fullscreen)
 
 (provide 'init-look)

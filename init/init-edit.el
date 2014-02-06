@@ -11,7 +11,9 @@
               )
 
 (dolist (hook '(shell-mode-hook
-                compilation-mode-hook))
+                compilation-mode-hook
+                erc-mode-hook
+                ))
   (add-hook hook
             (lambda ()
               (setq show-trailing-whitespace nil))))
