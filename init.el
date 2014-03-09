@@ -11,6 +11,7 @@
                  'coffee-mode
                  'web-mode
                  'yaml-mode
+                 'js2-mode
                  'misc-cmds
                  'ido-ubiquitous
                  'powerline
@@ -40,5 +41,6 @@
 ;; major modes
 (require 'init-c)
 (require 'init-web)
+(require 'init-js)
 
 (provide 'init)
