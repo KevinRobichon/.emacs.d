@@ -35,8 +35,9 @@
     (unless package-archive-contents (package-refresh-contents))
     (dolist (package packages)
       (package-maybe-install package))
-    (setq deps (package-list-dependencies-recursive packages))
-    (dolist (package (set-difference (package-installed) deps))
-      (package-delete (symbol-name package) (package-version-joined package)))))
+    ;(setq deps (package-list-dependencies-recursive packages))
+    ;(dolist (package (set-difference (package-installed) deps))
+      ;(package-delete (symbol-name package) (package-version-joined package)))
+    ))
 
 (provide 'init-package)
