@@ -1,22 +1,24 @@
 (add-to-list 'load-path (expand-file-name "init" user-emacs-directory))
 
+(require 'iso-transl)
 (require 'init-package)
-(package-declare 'evil
-                 'flycheck
-                 'company
-                 'magit
-                 'flx
-                 'flx-ido
-                 'smex
-                 'coffee-mode
-                 'web-mode
-                 'yaml-mode
-                 'js2-mode
-                 'misc-cmds
-                 'ido-ubiquitous
-                 'powerline
-                 'frame-fns
-                 'frame-cmds
+(package-declare 'evil                                    ;VIM
+                 'evil-leader                             ;leader key
+                 'flycheck                                ;on-the-fly syntax
+                 'company                                 ;completion
+                 'magit                                   ;GIT integration
+                 'flx                                     ;fuzzy search
+                 'flx-ido                                 ;flx for ido
+                 'smex                                    ;M-x enhancement
+                 'coffee-mode                             ;coffeescript
+                 'web-mode                                ;web templates
+                 'yaml-mode                               ;YAML
+                 'js2-mode                                ;javascript
+                 'misc-cmds                               ;some commands
+                 'ido-ubiquitous                          ;ido trully everywhere
+                 'powerline                               ;powerline bottom bar
+                 'frame-fns                               ;frame functions
+                 'frame-cmds                              ;frame commands (interactive)
                  'ujelly-theme
                  'color-theme-wombat+
                  'clues-theme
