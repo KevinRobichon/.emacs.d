@@ -15,7 +15,6 @@
 (package-declare 'use-package                             ;package loading
                  'evil                                    ;VIM
                  'evil-leader                             ;leader key
-                 'evil-nerd-commenter                     ;comments
                  'flycheck                                ;on-the-fly syntax
                  'company                                 ;completion
                  'magit                                   ;GIT integration
@@ -30,6 +29,9 @@
                  'misc-cmds                               ;some commands
                  'frame-fns                               ;frame functions
                  'frame-cmds                              ;frame commands (interactive)
+                 'nyan-mode                               ;nyan cat
+                 'smart-mode-line                         ;better modeline
+                 'smart-mode-line-powerline-theme         ;better powerline !
                  'ujelly-theme
                  'color-theme-wombat+
                  'clues-theme
@@ -39,6 +41,7 @@
                  'color-theme-sanityinc-tomorrow
                  'cyberpunk-theme
                  'base16-theme
+                 'sublime-themes
                  )
 (require 'use-package)
 
@@ -48,6 +51,9 @@
 
 (global-auto-revert-mode t)
 (show-paren-mode 1)
+
+(line-number-mode t)
+(column-number-mode t)
 
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
@@ -71,7 +77,20 @@
                                (scroll-up 1)))
   (setq mouse-sel-mode t))
 
+;; (load-theme 'sanityinc-tomorrow-night t)
 (load-theme 'grandshell t)
+
+(use-package smart-mode-line
+  :init
+  (setq sml/no-confirm-load-theme t)
+  (sml/setup)
+  (sml/apply-theme 'dark)
+  (set-face-attribute 'mode-line nil
+                      :box '(:line-width 1 :color "gray50"))
+)
+;; (use-package smart-mode-line-powerline-theme)
+(use-package nyan-mode
+  :init (nyan-mode))
 
 (use-package ido
   :init
@@ -100,21 +119,24 @@
     "b" 'ido-switch-buffer
     "f" 'ido-find-file
     "x" 'smex
-    "ci" 'evilnc-comment-or-uncomment-lines
     ))
-(use-package evil-nerd-commenter)
 (use-package evil
   :init
   (setq evil-default-cursor t)
   (evil-mode t))
 
+(use-package company
+  :commands global-company-mode
+  :idle (global-company-mode t)
+  :config
+  (define-key company-active-map (kbd "\C-n") 'company-select-next)
+  (define-key company-active-map (kbd "\C-p") 'company-select-previous)
+  (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
+  (define-key company-active-map (kbd "<tab>") 'company-complete))
+
 (use-package flycheck
   :commands global-flycheck-mode
   :idle (global-flycheck-mode t))
-
-(use-package company
-  :commands global-company-mode
-  :idle (global-company-mode t))
 
 (use-package magit)
 
