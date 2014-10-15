@@ -31,7 +31,6 @@
                  'frame-cmds                              ;frame commands (interactive)
                  'nyan-mode                               ;nyan cat
                  'smart-mode-line                         ;better modeline
-                 'smart-mode-line-powerline-theme         ;better powerline !
                  'ujelly-theme
                  'color-theme-wombat+
                  'clues-theme
@@ -77,7 +76,11 @@
                                (scroll-up 1)))
   (setq mouse-sel-mode t))
 
-;; (load-theme 'sanityinc-tomorrow-night t)
+(when (member "DejaVu Sans Mono" (font-family-list))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-10"))
+(when (member "Dina" (font-family-list))
+  (set-face-attribute 'default nil :font "Dina-8"))
+
 (load-theme 'grandshell t)
 
 (use-package smart-mode-line
@@ -109,22 +112,6 @@
   :init (smex-initialize)
   :bind ("M-x" . smex))
 
-(use-package evil-leader
-  :init
-  (global-evil-leader-mode)
-  :config
-  (setq evil-leader/in-all-states t)
-  (evil-leader/set-leader ",")
-  (evil-leader/set-key
-    "b" 'ido-switch-buffer
-    "f" 'ido-find-file
-    "x" 'smex
-    ))
-(use-package evil
-  :init
-  (setq evil-default-cursor t)
-  (evil-mode t))
-
 (use-package company
   :commands global-company-mode
   :idle (global-company-mode t)
@@ -139,6 +126,24 @@
   :idle (global-flycheck-mode t))
 
 (use-package magit)
+
+(use-package evil-leader
+  :init
+  (global-evil-leader-mode)
+  :config
+  (setq evil-leader/in-all-states t)
+  (evil-leader/set-leader ",")
+  (evil-leader/set-key
+    "b" 'ido-switch-buffer
+    "f" 'ido-find-file
+    "x" 'smex
+    ))
+(use-package evil
+  :pre-load
+  (setq evil-default-cursor t
+        evil-want-C-u-scroll t)
+  :init
+  (evil-mode t))
 
 (setq-default c-default-style "linux"
               c-basic-offset 4)
