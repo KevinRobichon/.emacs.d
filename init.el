@@ -1,10 +1,9 @@
 (require 'cl)
 (require 'iso-transl)
 
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("org" . "http://orgmode.org/elpa/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")))
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
 
 (defun package-declare (&rest packages)
@@ -15,6 +14,7 @@
 (package-declare 'use-package                             ;package loading
                  'evil                                    ;VIM
                  'evil-leader                             ;leader key
+                 'ace-jump-mode                           ;fast motion
                  'flycheck                                ;on-the-fly syntax
                  'company                                 ;completion
                  'magit                                   ;GIT integration
@@ -95,6 +95,8 @@
 (use-package nyan-mode
   :init (nyan-mode))
 
+(use-package magit)
+
 (use-package ido
   :init
   (ido-mode t)
@@ -102,15 +104,16 @@
   (setq ido-everywhere t
         ido-enable-flex-matching t
         ido-use-filename-at-point nil
-        ido-use-virtual-buffers t))
-(use-package ido-ubiquitous
-  :init (ido-ubiquitous-mode t))
-(use-package flx)
-(use-package flx-ido
-  :init (flx-ido-mode t))
-(use-package smex
-  :init (smex-initialize)
-  :bind ("M-x" . smex))
+        ido-use-virtual-buffers t)
+  (use-package ido-ubiquitous
+    :init (ido-ubiquitous-mode t))
+  (use-package flx
+    :config
+    (use-package flx-ido
+      :init (flx-ido-mode t)))
+  (use-package smex
+    :init (smex-initialize)
+    :bind ("M-x" . smex)))
 
 (use-package company
   :commands global-company-mode
@@ -125,25 +128,28 @@
   :commands global-flycheck-mode
   :idle (global-flycheck-mode t))
 
-(use-package magit)
+(use-package ace-jump-mode)
 
-(use-package evil-leader
-  :init
-  (global-evil-leader-mode)
-  :config
-  (setq evil-leader/in-all-states t)
-  (evil-leader/set-leader ",")
-  (evil-leader/set-key
-    "b" 'ido-switch-buffer
-    "f" 'ido-find-file
-    "x" 'smex
-    ))
 (use-package evil
   :pre-load
   (setq evil-default-cursor t
         evil-want-C-u-scroll t)
   :init
-  (evil-mode t))
+  (evil-mode t)
+  :config
+  (define-key evil-normal-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
+  (define-key evil-normal-state-map (kbd "S-SPC") 'evil-ace-jump-word-mode)
+  (use-package evil-leader
+    :init
+    (global-evil-leader-mode)
+    :config
+    (setq evil-leader/in-all-states t)
+    (evil-leader/set-leader ",")
+    (evil-leader/set-key
+      "b" 'ido-switch-buffer
+      "f" 'ido-find-file
+      "x" 'smex
+      )))
 
 (setq-default c-default-style "linux"
               c-basic-offset 4)
