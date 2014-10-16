@@ -138,7 +138,7 @@
   (evil-mode t)
   :config
   (define-key evil-normal-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "S-SPC") 'evil-ace-jump-word-mode)
+  (define-key evil-visual-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
   (use-package evil-leader
     :init
     (global-evil-leader-mode)
