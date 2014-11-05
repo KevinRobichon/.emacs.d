@@ -27,10 +27,9 @@
                  'yaml-mode                               ;YAML
                  'js2-mode                                ;javascript
                  'misc-cmds                               ;some commands
-                 'frame-fns                               ;frame functions
-                 'frame-cmds                              ;frame commands (interactive)
                  'nyan-mode                               ;nyan cat
                  'smart-mode-line                         ;better modeline
+                 'rainbow-delimiters                      ;rainbow
                  'ujelly-theme
                  'color-theme-wombat+
                  'clues-theme
@@ -40,7 +39,7 @@
                  'color-theme-sanityinc-tomorrow
                  'cyberpunk-theme
                  'base16-theme
-                 'sublime-themes
+                 'solarized-theme
                  )
 (require 'use-package)
 
@@ -69,29 +68,27 @@
   (require 'mouse)
   (xterm-mouse-mode t)
   (global-set-key [mouse-4] (lambda ()
-                               (interactive)
-                               (scroll-down 1)))
+                              (interactive)
+                              (scroll-down 1)))
   (global-set-key [mouse-5] (lambda ()
-                               (interactive)
-                               (scroll-up 1)))
+                              (interactive)
+                              (scroll-up 1)))
   (setq mouse-sel-mode t))
 
 (when (member "DejaVu Sans Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "DejaVu Sans Mono-10"))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-8"))
 (when (member "Dina" (font-family-list))
   (set-face-attribute 'default nil :font "Dina-8"))
 
-(load-theme 'grandshell t)
+(use-package solarized-theme
+  :init
+  (setq solarized-distinct-fringe-background t)
+  (load-theme 'solarized-dark t))
 
 (use-package smart-mode-line
   :init
   (setq sml/no-confirm-load-theme t)
-  (sml/setup)
-  (sml/apply-theme 'dark)
-  (set-face-attribute 'mode-line nil
-                      :box '(:line-width 1 :color "gray50"))
-)
-;; (use-package smart-mode-line-powerline-theme)
+  (sml/setup))
 (use-package nyan-mode
   :init (nyan-mode))
 
@@ -151,18 +148,28 @@
       "x" 'smex
       )))
 
-(setq-default c-default-style "linux"
-              c-basic-offset 4)
+(use-package web-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html?s\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.hbss\\'" . web-mode))
+  :config
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (setq web-mode-markup-indent-offset 4)
+              (setq web-mode-css-indent-offset 4)
+              (setq web-mode-code-indent-offset 4))))
 
-(add-hook 'web-mode-hook
-          (lambda ()
-            (setq web-mode-markup-indent-offset 4)
-            (setq web-mode-css-indent-offset 4)
-            (setq web-mode-code-indent-offset 4)))
+(use-package js2-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
+(use-package c-mode
+  :config
+  (setq-default c-default-style "linux"
+                c-basic-offset 4))
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
 (provide 'init)
