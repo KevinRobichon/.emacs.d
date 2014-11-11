@@ -18,17 +18,12 @@
                  'flycheck                                ;on-the-fly syntax
                  'company                                 ;completion
                  'magit                                   ;GIT integration
-                 'flx                                     ;fuzzy search
-                 'flx-ido                                 ;flx for ido
-                 'ido-ubiquitous                          ;ido trully everywhere
-                 'smex                                    ;M-x enhancement
+                 'helm                                    ;completion and search
                  'coffee-mode                             ;coffeescript
                  'web-mode                                ;web templates
                  'yaml-mode                               ;YAML
                  'js2-mode                                ;javascript
                  'clojure-mode                            ;clojure
-                 'cider                                   ;clojure ide
-                 'misc-cmds                               ;some commands
                  'nyan-mode                               ;nyan cat
                  'smart-mode-line                         ;better modeline
                  'rainbow-delimiters                      ;rainbow
@@ -96,23 +91,9 @@
 
 (use-package magit)
 
-(use-package ido
+(use-package helm
   :init
-  (ido-mode t)
-  :config
-  (setq ido-everywhere t
-        ido-enable-flex-matching t
-        ido-use-filename-at-point nil
-        ido-use-virtual-buffers t)
-  (use-package ido-ubiquitous
-    :init (ido-ubiquitous-mode t))
-  (use-package flx
-    :config
-    (use-package flx-ido
-      :init (flx-ido-mode t)))
-  (use-package smex
-    :init (smex-initialize)
-    :bind ("M-x" . smex)))
+  (helm-mode 1))
 
 (use-package company
   :commands global-company-mode
@@ -145,9 +126,13 @@
     (setq evil-leader/in-all-states t)
     (evil-leader/set-leader ",")
     (evil-leader/set-key
-      "b" 'ido-switch-buffer
-      "f" 'ido-find-file
-      "x" 'smex
+      "b" 'helm-mini
+      "f" 'helm-find-files
+      "x" 'helm-M-x
+      "/" 'helm-occur
+      "ho" 'helm-occur
+      "ht" 'helm-top
+      "hk" 'helm-show-kill-ring
       )))
 
 (use-package web-mode
@@ -164,6 +149,8 @@
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+
+(use-package clojure-mode)
 
 (use-package c-mode
   :config
