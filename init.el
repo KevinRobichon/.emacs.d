@@ -93,6 +93,7 @@
 
 (use-package helm
   :init
+  (setq helm-split-window-in-side-p t)
   (helm-mode 1))
 
 (use-package company
