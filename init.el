@@ -26,6 +26,8 @@
                  'web-mode                                ;web templates
                  'yaml-mode                               ;YAML
                  'js2-mode                                ;javascript
+                 'clojure-mode                            ;clojure
+                 'cider                                   ;clojure ide
                  'misc-cmds                               ;some commands
                  'nyan-mode                               ;nyan cat
                  'smart-mode-line                         ;better modeline
