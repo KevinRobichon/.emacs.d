@@ -19,6 +19,9 @@
                  'company                                 ;completion
                  'magit                                   ;GIT integration
                  'helm                                    ;completion and search
+                 'projectile                              ;projects
+                 'helm-projectile                         ;projects with helm
+                 'neotree                                 ;side filetree
                  'coffee-mode                             ;coffeescript
                  'web-mode                                ;web templates
                  'yaml-mode                               ;YAML
@@ -96,6 +99,16 @@
   (setq helm-split-window-in-side-p t)
   (helm-mode 1))
 
+(use-package neotree)
+
+(use-package projectile
+  :init
+  (projectile-global-mode)
+  :config
+  (use-package helm-projectile
+    :init
+    (helm-projectile-on)))
+
 (use-package company
   :commands global-company-mode
   :idle (global-company-mode t)
@@ -120,6 +133,11 @@
   :config
   (define-key evil-normal-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
   (define-key evil-visual-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
+  (add-hook 'neotree-mode-hook
+            (lambda ()
+              (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+              (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+              (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
   (use-package evil-leader
     :init
     (global-evil-leader-mode)
@@ -127,19 +145,23 @@
     (setq evil-leader/in-all-states t)
     (evil-leader/set-leader ",")
     (evil-leader/set-key
+      "n" 'neotree-toggle
       "b" 'helm-mini
       "f" 'helm-find-files
       "x" 'helm-M-x
       "/" 'helm-occur
-      "ho" 'helm-occur
       "ht" 'helm-top
       "hk" 'helm-show-kill-ring
+      "ps" 'helm-projectile-switch-project
+      "pb" 'helm-projectile-switch-to-buffer
+      "pf" 'helm-projectile-find-file
+      "pg" 'helm-projectile-grep
       )))
 
 (use-package web-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.html?s\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.hbss\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
   :config
   (add-hook 'web-mode-hook
             (lambda ()
