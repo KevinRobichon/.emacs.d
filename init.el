@@ -31,7 +31,6 @@
                  'smart-mode-line                         ;better modeline
                  'rainbow-delimiters                      ;rainbow
                  'ujelly-theme
-                 'color-theme-wombat+
                  'clues-theme
                  'grandshell-theme
                  'cherry-blossom-theme
