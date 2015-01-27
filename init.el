@@ -27,6 +27,7 @@
                  'yaml-mode                               ;YAML
                  'js2-mode                                ;javascript
                  'clojure-mode                            ;clojure
+                 'tss                                     ;typescript
                  'nyan-mode                               ;nyan cat
                  'smart-mode-line                         ;better modeline
                  'rainbow-delimiters                      ;rainbow
@@ -171,6 +172,10 @@
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+
+(use-package tss
+  :init
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
 
 (use-package clojure-mode)
 
