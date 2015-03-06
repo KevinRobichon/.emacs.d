@@ -28,6 +28,7 @@
                  'js2-mode                                ;javascript
                  'clojure-mode                            ;clojure
                  'tss                                     ;typescript
+                 'markdown-mode                           ;markdown
                  'nyan-mode                               ;nyan cat
                  'smart-mode-line                         ;better modeline
                  'rainbow-delimiters                      ;rainbow
@@ -160,7 +161,7 @@
 
 (use-package web-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.html?s\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?s?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
   :config
   (add-hook 'web-mode-hook
